@@ -1,0 +1,26 @@
+id = "herdr-autofetch"
+name = "Herdr Git Autofetch"
+version = "0.1.0"
+min_herdr_version = "0.9.1"
+description = "Fetch repositories belonging to open Herdr workspaces"
+platforms = ["linux"]
+
+[[actions]]
+id = "list"
+title = "Git Autofetch: list open repositories"
+contexts = ["global"]
+command = ["bash", "autofetch.sh", "--dry-run"]
+
+[[actions]]
+id = "fetch-now"
+title = "Git Autofetch: fetch now"
+contexts = ["global"]
+command = ["bash", "autofetch.sh", "--force"]
+
+# Intended for invocation by a periodic ui.tab_bar_right command. The stale
+# guard also prevents duplicate fetches from multiple clients or sessions.
+[[actions]]
+id = "tick"
+title = "Git Autofetch: scheduled fetch"
+contexts = ["global"]
+command = ["bash", "autofetch.sh", "--if-stale"]
